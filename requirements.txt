@@ -3,6 +3,9 @@ attrs==22.2.0
 coverage==7.1.0
 Django==4.1.7
 exceptiongroup==1.1.0
+factory-boy==3.2.1
+Faker==17.0.0
+inflection==0.5.1
 iniconfig==2.0.0
 packaging==23.0
 pluggy==1.0.0
@@ -10,9 +13,11 @@ py==1.11.0
 pytest==6.2.5
 pytest-cov==4.0.0
 pytest-django==4.5.2
+pytest-factoryboy==2.5.1
 pytest-pythonpath==0.7.4
 python-dateutil==2.8.2
 six==1.16.0
 sqlparse==0.4.3
 toml==0.10.2
 tomli==2.0.1
+typing_extensions==4.5.0

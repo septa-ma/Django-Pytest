@@ -1,39 +1,22 @@
 # all fixtures write here
 import pytest
+from pytest_factoryboy import register
+from tests.factories import UserFactory, ProductFactory, CategoryFactory
 from django.contrib.auth.models import User
 
+register(UserFactory) # the fixture is user_factory
+register(CategoryFactory)
+register(ProductFactory)
 
 @pytest.fixture
-def user(db):
-    user = User.objects.create_user('new-user')
-    print("new-user")
-    return user
+def new_user(db, user_factory):
+    user = user_factory.build() # produce an  object, count is 0
+    # user = user_factory.create() # save data to our test db, count is 1
+    count = User.objects.all().count()
+    return user, count
 
 @pytest.fixture
-def new_user_factory(db):
-    def create_app_user(
-        username: str,
-        password: str = None,
-        first_name: str = 'FName',
-        last_name: str = 'LName',
-        email: str = 'email@n.com',
-        is_staff: str = False,
-        is_superuser: str = False,
-        is_active: str = True,
-    ):
-        user = User.objects.create_user(
-            username=username,
-            password=password,
-            first_name=first_name,
-            last_name=last_name,
-            email=email,
-            is_staff=is_staff,
-            is_superuser=is_superuser,
-            is_active=is_active,
-        )
-        return user
-    return create_app_user
-
-@pytest.fixture
-def new_user(db, new_user_factory):
-    return new_user_factory("test","pass","fname","lname")
+def new_product(db, product_factory):
+    # product = product_factory.build()
+    product = product_factory.create()
+    return product
